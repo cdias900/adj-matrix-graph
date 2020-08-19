@@ -63,6 +63,9 @@ char **get_connections(char *filename) {
             }
         }
     }
+
+    fclose(f);
+
     return connections;
 }
 
