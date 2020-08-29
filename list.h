@@ -64,6 +64,7 @@ list *new_list(char **connections) {
 void print_list(list *g) {
     int i;
     node *n;
+    printf("Adjacency list:\n");
     for(i = 0; i < g->chars->length; i++) {
         printf("%c: ", g->chars->array[i]);
         n = g->nodes[i];
@@ -73,4 +74,33 @@ void print_list(list *g) {
         }
         printf("\n");
     }
+}
+
+void print_next_dfs(char c, list *g, char *arr) {
+    if(add_char_to_array(c, arr, g->chars->length)) {
+        printf("%c -> ", c);
+        int charIndex = get_char_index(c, g->chars->array);
+        node *n = g->nodes[charIndex];
+        char aux[UCHAR_MAX] = { 0 };
+        int i = 0;
+        while(n) {
+            aux[i] = g->chars->array[n->dest];
+            n = n->next;
+            i++;
+        }
+        char *nodes = malloc(i * sizeof(char));
+        int j;
+        for(j = 0; j < i; j++) nodes[j] = aux[j];
+        sort_array(nodes, i);
+        for(j = 0; j < i; j++) {
+            print_next_dfs(nodes[j], g, arr);
+        }
+    } else return;
+}
+
+void print_dfs(list *g) {
+    char *arr = calloc(g->chars->length, sizeof(char));
+    printf("DFS: ");
+    print_next_dfs(g->chars->array[0], g, arr);
+    printf("\n");
 }

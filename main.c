@@ -66,6 +66,8 @@ char **get_connections(char *filename) {
 
     fclose(f);
 
+    sort_matrix(connections, UCHAR_MAX);
+
     return connections;
 }
 
@@ -73,6 +75,8 @@ int main(int argc, char *argv[]) {
     char **connections = get_connections(argv[1]);
     list *g = new_list(connections);
     print_list(g);
+    printf("\n");
+    print_dfs(g);
     printf("\n");
     matrix *m = new_matrix(connections);
     print_matrix(m);

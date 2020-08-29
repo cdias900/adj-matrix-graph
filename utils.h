@@ -43,3 +43,50 @@ int get_char_index(char c, char *chars) {
         if(chars[i] == c) return i;
     return -1;
 }
+
+void sort_matrix(char **arr, int length) {
+    int i, j;
+    char *aux;
+    for(i = 1; i < length; i++) {
+        aux = arr[i];
+        j = i - 1;
+        while(j >= 0
+            && (arr[j][0] > aux[0]
+            || (arr[j][0] == aux[0]
+            && arr[j][1] > aux[1]))
+            && arr[j][0]
+            && arr[j][1]
+            && aux[0]
+            && aux[1]) {
+            arr[j + 1] = arr[j];
+            j -= 1;
+        }
+        arr[j + 1] = aux;
+    }
+}
+
+void sort_array(char *arr, int length) {
+    int i, j;
+    char aux;
+    for(i = 1; i < length; i++) {
+        aux = arr[i];
+        j = i - 1;
+        while(j >= 0 && arr[j] > aux) {
+            arr[j + 1] = arr[j];
+            j -= 1;
+        }
+        arr[j + 1] = aux;
+    }
+}
+
+int add_char_to_array(char c, char *arr, int length) {
+    int i;
+    for(i = 0; i < length; i++) {
+        if(!arr[i]) {
+            arr[i] = c;
+            return 1;
+        }
+        if(arr[i] == c) return 0;
+    }
+    return 0;
+}

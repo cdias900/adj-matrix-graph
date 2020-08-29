@@ -37,7 +37,7 @@ matrix *new_matrix(char **connections) {
 }
 
 void print_matrix(matrix *m) {
-    printf("X ");
+    printf("Adjacency matrix:\nX ");
     int i, j;
     for(i = 0; i < m->chars->length; i++)
         printf("%c ", m->chars->array[i]);
